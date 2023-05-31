@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb');
 const Movie = require('../models/movie');
 const {
   CREATED,
@@ -6,18 +7,16 @@ const BadRequestError = require('../errors/BadRequestError');
 const ForbiddenError = require('../errors/ForbiddenError');
 const NotFoundError = require('../errors/NotFoundError');
 
-// GET /movies — возвращает все сохранённые текущим  пользователем фильмы
-const getMovies = (req, res, next) => {
-  Movie.find({})
-    .then((movies) => res.send(movies))
+function getMovies(req, res, next) {
+  const userId = new ObjectId(req.user._id);
+  Movie.find({ owner: userId })
+    .populate(['owner'])
+    .then((movies) => {
+      res.send(movies);
+      console.log(movies);
+    })
     .catch(next);
-};
-
-// const getMoviee = (req, res, next) => {
-//     Movie.find({req.movie._id})
-//       .then((movies) => res.send(movies))
-//       .catch(next);
-//   };
+}
 
 // POST /movies — создаёт фильм с переданными в теле данными
 const createMovie = (req, res, next) => {
@@ -78,48 +77,6 @@ const deleteMovie = (req, res, next) => {
       }
     });
 };
-
-// const likeMovie = (req, res, next) => {
-//   Movie.findByIdAndUpdate(
-//     req.params.cardId,
-//     { $addToSet: { likes: req.user._id } },
-//     { new: true },
-//   )
-//     .then((card) => {
-//       if (!card) {
-//         throw new NotFoundError('Карточка не найдена');
-//       }
-//       res.send(card);
-//     })
-//     .catch((err) => {
-//       if (err.name === 'CastError') {
-//         next(new BadRequestError('Карточка с данным ID не найдена'));
-//       } else {
-//         next(err);
-//       }
-//     });
-// };
-
-// const dislikeMovie = (req, res, next) => {
-//   Movie.findByIdAndUpdate(
-//     req.params.cardId,
-//     { $pull: { likes: req.user._id } },
-//     { new: true },
-//   )
-//     .then((card) => {
-//       if (!card) {
-//         throw new NotFoundError('Карточка не найдена');
-//       }
-//       res.send(card);
-//     })
-//     .catch((err) => {
-//       if (err.name === 'CastError') {
-//         next(new BadRequestError('Карточка с данным ID не найдена'));
-//       } else {
-//         next(err);
-//       }
-//     });
-// };
 
 module.exports = {
   getMovies,
