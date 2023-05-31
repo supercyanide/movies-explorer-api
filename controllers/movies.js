@@ -13,7 +13,6 @@ function getMovies(req, res, next) {
     .populate(['owner'])
     .then((movies) => {
       res.send(movies);
-      console.log(movies);
     })
     .catch(next);
 }
