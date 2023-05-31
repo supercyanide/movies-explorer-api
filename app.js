@@ -3,10 +3,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
-const cookieParser = require('cookie-parser');
+// const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
 
-const crashTestRouter = require('./routes/crash');
+// const crashTestRouter = require('./routes/crash');
 const userRouter = require('./routes/users');
 const signInRouter = require('./routes/signin');
 const signUpRouter = require('./routes/signup');
@@ -21,24 +21,24 @@ const cors = require('./middlewares/cors');
 
 const { PORT = 3000 } = process.env;
 
-mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
+mongoose.connect('mongodb://127.0.0.1:27017/moviesdb');
 const app = express();
 app.use(cors);
 app.use(express.json());
 app.use(helmet());
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use(requestLogger);
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // за 15 минут
   max: 100, // можно совершить максимум 100 запросов с одного IP
 });
 app.use(limiter);
-app.use(crashTestRouter);
+// app.use(crashTestRouter);
 app.use(signInRouter);
 app.use(signUpRouter);
 app.use(auth);
-app.use(userRouter);
 app.use(moviesRouter);
+app.use(userRouter);
 app.use('*', (req, res, next) => {
   next(new NotFoundError('URL не найден'));
 });

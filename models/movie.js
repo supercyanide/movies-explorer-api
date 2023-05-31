@@ -55,8 +55,6 @@ const movieSchema = new mongoose.Schema({
   thumbnail: { // миниатюрное изображение постера к фильму
     type: String,
     required: true,
-    minlength: 2,
-    maxlength: 30,
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
@@ -64,9 +62,8 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
   movieId: {
-    type: Number,
+    type: String,
     required: true,
-    unique: true,
   },
   nameRU: {
     type: String,

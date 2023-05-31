@@ -8,19 +8,22 @@ router.post('/movies', celebrate({
   body: Joi.object().keys({
     country: Joi.string().required().min(2).max(30),
     director: Joi.string().required().min(2).max(30),
+    duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
     nameRU: Joi.string().required().min(2).max(30),
     nameEN: Joi.string().required().min(2).max(30),
-    image: Joi.string().required().regex(/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/),
-    trailer: Joi.string().required().regex(/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/),
-    thumbnail: Joi.string().required().regex(/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/),
-    movieId: Joi.number().required(),
+    image: Joi.string().required(),
+    trailerLink: Joi.string().required(),
+    thumbnail: Joi.string().required(),
+    movieId: Joi.string().required(),
   }),
 }), createMovie);
 
-router.delete('/movies/:movieId', celebrate({
+router.delete('/movies/:_id', celebrate({
   params: Joi.object().keys({
-    cardId: Joi.string().required().hex().length(24),
+    _id: Joi.string().required(),
   }),
 }), deleteMovie);
+
+module.exports = router;
