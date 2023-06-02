@@ -1,19 +1,15 @@
 const router = require('express').Router();
 
-const userRouter = require('./users');
-const moviesRouter = require('./movies');
-const signInRouter = require('./signin');
-const signUpRouter = require('./signup');
+const userRoutes = require('./users');
+const movieRoutes = require('./movies');
+const signin = require('./signin');
+const signup = require('./signup');
 const auth = require('../middlewares/auth');
-const NotFoundError = require('../errors/NotFoundError');
 
-router.use(signInRouter);
-router.use(signUpRouter);
+router.use('/signin', signin);
+router.use('/signup', signup);
 router.use(auth);
-router.use(userRouter);
-router.use(moviesRouter);
-router.use('*', (req, res, next) => {
-  next(new NotFoundError('URL не найден'));
-});
+router.use('/users', userRoutes);
+router.use('/movies', movieRoutes);
 
 module.exports = router;

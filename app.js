@@ -3,10 +3,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
-const { limiter } = require('./middlewares/rateLimiter');
+const limiter = require('./middlewares/rateLimiter');
 const router = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
+const NotFoundError = require('./errors/NotFoundError');
 const errorHandler = require('./middlewares/error-handler');
 const cors = require('./middlewares/cors');
 
@@ -23,6 +24,11 @@ app.use(helmet());
 app.use(requestLogger);
 app.use(limiter);
 app.use(router);
+
+app.use('*', (req, res, next) => {
+  next(new NotFoundError('URL не найден'));
+});
+
 app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
