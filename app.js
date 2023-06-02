@@ -10,7 +10,6 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/error-handler');
 const cors = require('./middlewares/cors');
 
-// const { PORT = 3000, MONGODB_URI = 'mongodb://localhost:27017/bitfilmsdb' } = process.env;
 const { PORT = 3000 } = process.env;
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 
