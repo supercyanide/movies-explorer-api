@@ -60,17 +60,17 @@ const deleteMovie = (req, res, next) => {
   Movie.findByIdAndRemove(req.params._id)
     .then((movie) => {
       if (!movie) {
-        throw new NotFoundError('Карточка не найдена');
+        throw new NotFoundError('Фильм не найден');
       }
       if (req.user._id === movie.owner.toString()) {
-        res.send({ message: 'Карточка удалена' });
+        res.send({ message: 'Фильм успешно удален' });
       } else {
-        next(new ForbiddenError('Вы можете удалять только свои карточки'));
+        next(new ForbiddenError('Вы можете удалять только свои фильмы'));
       }
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        next(new BadRequestError('Карточка с данным ID не найдена'));
+        next(new BadRequestError('Фильм с данным ID не найдена'));
       } else {
         next(err);
       }
