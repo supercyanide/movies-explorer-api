@@ -3,8 +3,8 @@ const allowedCors = [
   'http://localhost:3000',
   'http://api.movies.supercyanide.nomoredomains.rocks',
   'https://api.movies.supercyanide.nomoredomains.rocks',
-  'http://movies.supercyanide.nomoredomains.rocks',
-  'https://movies.supercyanide.nomoredomains.rocks',
+  'http://movies.supercyanide.nomoreparties.sbs',
+  'https://movies.supercyanide.nomoreparties.sbs',
 ];
 
 module.exports = (req, res, next) => {
