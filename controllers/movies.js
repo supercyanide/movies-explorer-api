@@ -21,29 +21,27 @@ function getMovies(req, res, next) {
 const createMovie = (req, res, next) => {
   const {
     country,
-    director,
     duration,
     year,
+    rating,
+    genre,
     description,
     image,
     trailerLink,
-    thumbnail,
     movieId,
-    nameRU,
-    nameEN,
+    name,
   } = req.body;
   Movie.create({
     country,
-    director,
     duration,
     year,
+    rating,
+    genre,
     description,
     image,
     trailerLink,
-    thumbnail,
     movieId,
-    nameRU,
-    nameEN,
+    name,
     owner: req.user._id,
   })
     .then((movie) => res.status(CREATED).send(movie))

@@ -8,22 +8,24 @@ const movieSchema = new mongoose.Schema({
     minlength: 2,
     maxlength: 150,
   },
-  director: {
-    type: String,
-    required: true,
-    minlength: 2,
-    maxlength: 150,
-  },
-  duration: {
+  year: {
     type: Number,
     required: true,
   },
-  year: {
+  rating: {
+    type: Number,
+    required: true,
+  },
+  genre: {
     type: String,
     required: true,
   },
   description: {
     type: String,
+    required: true,
+  },
+  duration: {
+    type: Number,
     required: true,
   },
   image: {
@@ -52,10 +54,6 @@ const movieSchema = new mongoose.Schema({
       message: 'Некорректный URL',
     },
   },
-  thumbnail: { // миниатюрное изображение постера к фильму
-    type: String,
-    required: true,
-  },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
@@ -65,11 +63,7 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  nameRU: {
-    type: String,
-    required: true,
-  },
-  nameEN: {
+  name: {
     type: String,
     required: true,
   },

@@ -10,9 +10,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/error-handler');
 const cors = require('./middlewares/cors');
 
-const { PORT = 3000 } = process.env;
-mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
-
+const PORT = process.env.PORT || 3030;
 const app = express();
 app.use(cors);
 app.use(express.json());
@@ -24,6 +22,15 @@ app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`🚀 Listening on ${PORT} port`);
-});
+const start = async () => {
+  try {
+    await mongoose.connect('mongodb+srv://supercyanide:08246353Dd@movies-db.ip1yica.mongodb.net/?retryWrites=true&w=majority');
+    // await mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
+    app.listen(PORT, () => {
+      console.log(`🚀 Listening on ${PORT} port`);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+start();
