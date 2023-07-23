@@ -1,6 +1,5 @@
 const allowedCors = [
-  'https://movies.supercyanide.nomoreparties.sbs',
-  'http://movies.supercyanide.nomoreparties.sbs',
+  'https://movies-frontend-jj0q.onrender.com',
   'http://localhost:3001',
 ];
 
