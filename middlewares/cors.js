@@ -1,4 +1,5 @@
 const allowedCors = [
+  '*',
   'https://movies-frontend-jj0q.onrender.com',
   'http://localhost:3001',
 ];
