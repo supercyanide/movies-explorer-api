@@ -20,26 +20,14 @@ function getMovies(req, res, next) {
 // POST /movies — создаёт фильм с переданными в теле данными
 const createMovie = (req, res, next) => {
   const {
-    country,
-    duration,
     year,
-    rating,
-    genre,
-    description,
     image,
-    trailerLink,
     movieId,
     name,
   } = req.body;
   Movie.create({
-    country,
-    duration,
     year,
-    rating,
-    genre,
-    description,
     image,
-    trailerLink,
     movieId,
     name,
     owner: req.user._id,
