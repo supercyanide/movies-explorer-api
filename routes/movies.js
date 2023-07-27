@@ -9,7 +9,7 @@ router.post('/movies', celebrate({
     // country: Joi.string().required().min(2).max(150),
     // director: Joi.string().required().min(2).max(150),
     // duration: Joi.number().required(),
-    year: Joi.string().required(),
+    year: Joi.number().required(),
     // description: Joi.string().required().min(2).max(4000),
     name: Joi.string().required().min(2).max(150),
     // rating: Joi.number().required(),
